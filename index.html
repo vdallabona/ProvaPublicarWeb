@@ -53,10 +53,21 @@
 
         <h1>5: O que é um servidor de banco de dados, explique como fazer o backup e restaurar  esse backup. Utilize imagens para ilustrar. (Para facilitar utilize o arquivo em anexo)</h1>
         <p>Um servidor de banco de dados é, como o nome sujere, um servidor cujo propósito é rodar um banco de dados. Esse que normalmente é acessado por uma ou mais aplicações localizadas em outro(s) servidores.</p>
-
         <p>
-            Fazendo o backup e restauração de um banco de dados em um sistema Linux Debian</br> Passo 1:
+            Fazendo o backup e restauração de um banco de dados em um sistema Linux Debian
         </p>
+        <p>
+            Primeiro é necessário iniciar o banco de dados com o comando: sudo service mariadb start</br></br>Depois você pode verificar se ele está rodando com o comando: sudo service mariadb status</br></br> Se o banco estiver rodando é necessário entrar no MariaDB, note que também é necessário usar o sudo. Como mostrado com os erros da imagem de exemplo. O comando então fica: sudo mariadb -uroot -p </br></br> Note que usamos o -uroot como perfil, mas com as permissões certas poderíamos usar outro perfil. Como o senac, no caso do exemplo.
+        </p>
+        <img src="./img/passo-1-db.png" alt="img1-bd">
+        <p>
+            Agora que estamos dentro do MariaDB, temos que terminar todos os comandos com ; Primeiramente, para vermos os bancos de dados existentes usamos o comando show databases; </br></br> Então escolhemos um banco de dados, nesse caso o webservices e informamos que iremos utiliza-lo com o comando: use webservices</br></br> Uma vez feito isso precisamos copiar o banco de dados para um arquivo sql que iremos nomear. O comando para isso é: mysqldump -uroot -p webservices > backup_webservices1.sql</br></br> Nessa linha note que eu esqueci de substituir o nome de exemplo do banco de dados nas primeiras tentativas, resultando em erro. Note também que o nome do arquivo resultante é determinado nesse momento, portanto pode seguir o padrão que for mais conveniente para você. </br></br>Note também que esse comando deve ser utilizado fora do MariaDB e com sudo, ou ele também apresentará erros conforme o visto no exemplo. Uma vez feito isso pode-se usar o comando ls para vizualizar o arquivo de backup criado.
+        </p>
+        <img src="./img/passo-2-db.png" alt="img1-bd">
+        <p>
+            Uma vez tendo o backup pronto basta saber como copiá-lo para o banco de dados novamente. Esse comando também deve ser utilizado fora do MariaDB. O comando é: mysql -u senac -p webservices < backup_webservices1.sql</br></br> Note que dessa vez ao invez de usar o -uroot estou utilizando o usuario senac que também tem a permissão de executar esse comando.
+        </p>
+        <img src="./img/passo-3-db.png" alt="img1-bd">
 
         </br></br></br>
 
